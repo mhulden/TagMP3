@@ -3,7 +3,7 @@
 `tagmp3` is a native macOS application for inspecting, editing, and organizing
 metadata in local audio files.
 
-<img src="TagMP3/tagmp3-logo-original.jpg" width="704" height="704" alt="tagmp3 logo">
+<img src="TagMP3/tagmp3-logo-rounded.png" width="352" height="352" alt="tagmp3 logo">
 
 ## Current development build
 
