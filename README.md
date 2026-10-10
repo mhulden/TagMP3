@@ -3,6 +3,8 @@
 `tagmp3` is a native macOS application for inspecting, editing, and organizing
 metadata in local audio files.
 
+<img src="TagMP3/tagmp3-logo-original.jpg" width="704" height="704" alt="tagmp3 logo">
+
 ## Current development build
 
 The first vertical slice supports:
@@ -36,8 +38,8 @@ Requirements: macOS 13 or newer and the installed Xcode toolchain.
 ./scripts/test.sh
 ```
 
-Pull requests and pushes to `main` run the same test entry point on the pinned
-macOS/Xcode environment through `.github/workflows/test.yml`. Release signing,
+Pull requests and pushes to `main` run the same test entry point on the macOS 15
+Intel GitHub Actions runner through `.github/workflows/test.yml`. Release signing,
 notarization, and the separate universal-binary workflow remain intentionally
 deferred.
 
