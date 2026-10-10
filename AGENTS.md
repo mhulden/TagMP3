@@ -14,6 +14,17 @@ The scraped Mp3tag website and Windows documentation in `www.mp3tag.de/` and `do
 
 Do not copy Mp3tag source code, proprietary assets, screenshots, icons, branding, trade dress, or documentation prose into the product. Do not ship the scraped reference sites in an application bundle or release archive. Refer to them only to understand user needs and expected metadata behavior.
 
+## Current milestone
+
+As of 2026-10-10, the repository has reached the first public test milestone:
+
+- `v1.0.0` is published on GitHub as an unsigned, not-notarized prerelease.
+- The release workflow builds and verifies a universal `x86_64`/`arm64` app on a GitHub-hosted macOS 15 Intel runner, packages it, and publishes a checksum.
+- The current vertical slice supports local inspection and staged editing, artwork workflows, filename organization and filename-to-tag parsing, filtering/sorting, playlists/exports, a local preview player, and MusicBrainz/Cover Art Archive staging.
+- The app is configured for macOS 13 or newer. Signing, notarization, complete format conformance, and the broader Stage 1 quality gates remain future work.
+
+The milestone is intentionally not a claim that the entire Stage 1 or Stage 5 backlog is complete. The backlog below records the narrower completed slices and keeps evidence-dependent hardening tasks open.
+
 ## Product principles
 
 1. **Safe before clever.** Music files may be irreplaceable. A failed or cancelled edit must not leave a partially written file. Never overwrite audio bytes casually.
@@ -58,7 +69,7 @@ These defaults allow implementation to begin. Items labeled **Decision required*
 
 ### Platform and language
 
-- Build a native Swift application using the installed Xcode 15.2 toolchain and Swift 5.9.2; adopt Swift 6 language-mode checks where the Xcode 15 toolchain supports them without compromising the macOS 13 target.
+- Build a native Swift application targeting macOS 13 or newer. The package manifest remains Swift 5.9-compatible; local development uses the installed Xcode toolchain, while CI currently runs on `macos-15-intel` and reports the selected Xcode version. Keep toolchain changes documented and avoid assuming that the historical Xcode 15.2 installation is available.
 - Deployment target: macOS 13 Ventura.
 - Use SwiftUI for the application shell, inspector forms, sheets, settings, and commands. Use an `NSTableView` bridge when necessary for a high-performance, editable, multi-column track grid. Do not force a pure-SwiftUI table if profiling shows selection, editing, or thousands-of-row performance is inadequate.
 - Use Swift concurrency with strict checking. UI state is main-actor isolated. Metadata and filesystem services expose `async` operations and return `Sendable` value types.
@@ -336,7 +347,7 @@ Keep automation declarative and previewable. Importing community recipes is data
 
 ### Stage 5 — Release hardening and community launch
 
-**Outcome:** a stable, documented, accessible open-source release distributed as a signed/notarized universal macOS application with reproducible release procedures.
+**Outcome:** a stable, documented, accessible open-source release distributed as a signed/notarized universal macOS application with reproducible release procedures. The current `v1.0.0` unsigned prerelease is an earlier testing milestone, not completion of this stage.
 
 This stage includes threat modeling, fuzz/corrupt-file testing, performance work, localization readiness, contribution governance, update strategy, release automation, and recovery documentation. Mac App Store packaging is separate and only pursued if the sandbox/distribution decision supports it.
 
@@ -346,19 +357,19 @@ This stage includes threat modeling, fuzz/corrupt-file testing, performance work
 
 01-02: Scaffold the Xcode macOS app, `TagMP3Core` Swift package, unit/UI test targets, string catalog, logging categories, CI workflow, bootstrap/test scripts, README, notices, and contributor/security documents. The empty app must launch and all test commands must pass on the pinned macOS toolchain. [NOT COMPLETE]
 
-01-03: Implement format-independent domain values and metadata/file-access protocols, including multi-value fields, artwork descriptors, fingerprints, explicit `.keep`/`.set`/`.remove` patches, structured errors, capability reporting, and unit-test fakes. [NOT COMPLETE]
+01-03: Implement format-independent domain values and metadata/file-access protocols, including multi-value fields, artwork descriptors, fingerprints, explicit `.keep`/`.set`/`.remove` patches, structured errors, capability reporting, and unit-test fakes. [COMPLETE]
 
-01-04: Implement cancellable file/folder opening, recursive discovery, drag/drop, supported-file filtering, symlink/package safety, incremental MP3 metadata reads, recent locations, scan progress, and aggregated errors without blocking the main actor. [NOT COMPLETE]
+01-04: Implement cancellable file/folder opening, recursive discovery, drag/drop, supported-file filtering, symlink/package safety, incremental MP3 metadata reads, recent locations, scan progress, and aggregated errors without blocking the main actor. [COMPLETE]
 
 01-05: Build the native workspace shell with source area, performant multi-select track table, inspector, filter field, status/progress area, menus, keyboard commands, window restoration, dark mode, accessibility foundations, and an optional lightweight local audio preview player with play/pause, seeking, volume, and selection-aware stopping. Use generated/demo snapshots for UI tests rather than real music. [NOT COMPLETE]
 
-01-06: Implement single and batch common-field editing with true mixed states, staged dirty patches, dirty row/field indicators, staged undo/redo, discard/reload flows, all-fields inspection, unsaved-close protection, and no implicit saving on selection changes. [NOT COMPLETE]
+01-06: Implement single and batch common-field editing with true mixed states, staged dirty patches, dirty row/field indicators, staged undo/redo, discard/reload flows, all-fields inspection, unsaved-close protection, and no implicit saving on selection changes. [COMPLETE]
 
-01-07: Implement Stage 1 artwork workflows for MP3 front covers: view metadata, add via picker/paste/drop, preserve original JPEG/PNG bytes, replace, remove, export, outward drag, batch intent confirmation, thumbnail caching, and memory/size safeguards. [NOT COMPLETE]
+01-07: Implement Stage 1 artwork workflows for MP3 front covers: view metadata, add via picker/paste/drop, preserve original JPEG/PNG bytes, replace, remove, export, outward drag, batch intent confirmation, thumbnail caching, and memory/size safeguards. [COMPLETE]
 
 01-08: Implement safe MP3 commits using temporary siblings, pre-write fingerprint checks, post-write reopen/semantic verification, audio-essence verification in tests, permission/xattr preservation, atomic replacement, cancellation boundaries, cleanup, and per-file batch result reporting/retry. [NOT COMPLETE]
 
-01-09: Implement basic organization: selection-order auto track numbering with optional totals/zero padding, a small brace-based filename template, live old/new preview, macOS filename sanitization, case-only rename handling, collision detection, and safe planned rename execution. [NOT COMPLETE]
+01-09: Implement basic organization: selection-order auto track numbering with optional totals/zero padding, a small brace-based filename template, live old/new preview, macOS filename sanitization, case-only rename handling, collision detection, and safe planned rename execution. [COMPLETE]
 
 01-10: Complete Stage 1 fixture coverage, 5,000-file performance test, corruption/read-only/external-change tests, UI smoke tests, keyboard/VoiceOver review, original quick-start documentation, and the first runnable development build. [NOT COMPLETE]
 
