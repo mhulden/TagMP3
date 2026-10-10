@@ -49,7 +49,7 @@ jobs:
           binary="$app/Contents/MacOS/TagMP3"
           test -d "$app"
           lipo -info "$binary"
-          lipo -verify_arch x86_64 arm64 "$binary"
+          lipo "$binary" -verify_arch x86_64 arm64
           ditto -c -k --sequesterRsrc --keepParent "$app" TagMP3-macos-universal.zip
           shasum -a 256 TagMP3-macos-universal.zip > TagMP3-macos-universal.zip.sha256
 
