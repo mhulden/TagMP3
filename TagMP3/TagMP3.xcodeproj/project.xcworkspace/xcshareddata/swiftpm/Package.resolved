@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "taglibswift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/jeonghi/TagLibSwift.git",
+      "state" : {
+        "branch" : "530f2e1b78c0851a28fca16a279b649b17810029",
+        "revision" : "a36e48f43a4cea1fd41baa0c90acdb6f35444800"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -1,0 +1,35 @@
+name: Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  macos-tests:
+    name: macOS tests
+    runs-on: macos-13
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Select Xcode 15.2
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcode_path="/Applications/Xcode_15.2.app"
+          if [[ ! -d "$xcode_path" ]]; then
+            echo "Xcode 15.2 is required for this workflow but was not found."
+            ls -d /Applications/Xcode*.app 2>/dev/null || true
+            exit 1
+          fi
+          sudo xcode-select --switch "$xcode_path"
+          xcodebuild -version
+
+      - name: Run package and Xcode tests
+        run: ./scripts/test.sh

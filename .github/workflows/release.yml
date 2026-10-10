@@ -1,0 +1,69 @@
+name: Release candidate
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  universal-build:
+    name: Unsigned universal macOS build
+    runs-on: macos-13
+    timeout-minutes: 45
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Select Xcode 15.2
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcode_path="/Applications/Xcode_15.2.app"
+          if [[ ! -d "$xcode_path" ]]; then
+            echo "Xcode 15.2 is required for this workflow but was not found."
+            ls -d /Applications/Xcode*.app 2>/dev/null || true
+            exit 1
+          fi
+          sudo xcode-select --switch "$xcode_path"
+          xcodebuild -version
+
+      - name: Run tests
+        run: ./scripts/test.sh
+
+      - name: Build universal unsigned app
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild \
+            -project TagMP3/TagMP3.xcodeproj \
+            -scheme TagMP3 \
+            -configuration Release \
+            -destination 'platform=macOS' \
+            -derivedDataPath "$RUNNER_TEMP/TagMP3DerivedData" \
+            ARCHS='x86_64 arm64' \
+            ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build
+
+      - name: Verify slices and package
+        shell: bash
+        run: |
+          set -euo pipefail
+          app="$RUNNER_TEMP/TagMP3DerivedData/Build/Products/Release/TagMP3.app"
+          binary="$app/Contents/MacOS/TagMP3"
+          test -d "$app"
+          lipo -info "$binary"
+          lipo -verify_arch x86_64 arm64 "$binary"
+          ditto -c -k --sequesterRsrc --keepParent "$app" TagMP3-macos-universal.zip
+          shasum -a 256 TagMP3-macos-universal.zip > TagMP3-macos-universal.zip.sha256
+
+      - name: Upload unsigned artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: TagMP3-macos-universal-unsigned
+          path: |
+            TagMP3-macos-universal.zip
+            TagMP3-macos-universal.zip.sha256

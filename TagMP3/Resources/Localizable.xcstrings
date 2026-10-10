@@ -1,0 +1,195 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "%@" : {
+
+    },
+    "%@: %@  →  %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@  →  %3$@"
+          }
+        }
+      }
+    },
+    "%@: %@ → %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@: %2$@ → %3$@"
+          }
+        }
+      }
+    },
+    "%@%@, %@ bytes" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@%2$@, %3$@ bytes"
+          }
+        }
+      }
+    },
+    "Additional Fields" : {
+
+    },
+    "Artwork" : {
+
+    },
+    "Artwork operations apply to all selected tracks and remain staged until saved." : {
+
+    },
+    "Artwork: %@" : {
+
+    },
+    "Changes remain staged until you save the selected tracks." : {
+
+    },
+    "Copy field" : {
+
+    },
+    "Copyright © 2026 tagmp3" : {
+
+    },
+    "Each field has an explicit batch operation. Mixed values are never written as display text." : {
+
+    },
+    "Editing %@ tracks" : {
+
+    },
+    "Embedded images" : {
+
+    },
+    "Enter text to find before previewing or staging a replacement." : {
+
+    },
+    "Example: {album}/{track:02} - {title} [ - {artist}]" : {
+
+    },
+    "Fields" : {
+
+    },
+    "Fields to stage" : {
+
+    },
+    "Filename overlap: %@%" : {
+      "extractionState" : "extracted_with_value",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Filename overlap: %1$@%2$"
+          }
+        }
+      }
+    },
+    "Infer metadata from each selected filename or folder path. Changes remain staged until saved." : {
+
+    },
+    "Inspector" : {
+
+    },
+    "Lowercase" : {
+
+    },
+    "No match" : {
+
+    },
+    "No selected paths match this template." : {
+
+    },
+    "No Tracks" : {
+
+    },
+    "No valid destinations were generated." : {
+
+    },
+    "Online Lookup" : {
+
+    },
+    "Open a folder or drop audio files here to begin." : {
+
+    },
+    "Parse Names" : {
+
+    },
+    "Placeholders: {title}, {artist}, {album}, {albumArtist}, {track:02}, {disc:02}. Use [optional text] and {{escaped braces}}." : {
+
+    },
+    "Preview" : {
+
+    },
+    "Releases" : {
+
+    },
+    "Remove field" : {
+
+    },
+    "Rename Files" : {
+
+    },
+    "Replace text" : {
+
+    },
+    "Resize Artwork" : {
+
+    },
+    "Review %@" : {
+
+    },
+    "Search MusicBrainz, review the match, and stage only the fields you select. Nothing is saved automatically." : {
+
+    },
+    "Select a track to inspect its metadata." : {
+
+    },
+    "TagMP3" : {
+
+    },
+    "Technical" : {
+
+    },
+    "The converted or resized image is staged as a new JPEG. The original remains available through Undo until you save." : {
+
+    },
+    "Track alignment" : {
+
+    },
+    "Tracks" : {
+
+    },
+    "Transform Fields" : {
+
+    },
+    "Trim whitespace" : {
+
+    },
+    "Uppercase" : {
+
+    },
+    "Version %@" : {
+
+    },
+    "Writing %@ from %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "Writing %1$@ from %2$@"
+          }
+        }
+      }
+    },
+    "Writing selected fields from the matched release. Local edits remain staged until Save." : {
+
+    },
+    "Your staged edits will remain unsaved unless you save them now." : {
+
+    }
+  },
+  "version" : "1.0"
+}
